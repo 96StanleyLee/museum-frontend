@@ -10,12 +10,13 @@ import { Link, useNavigate } from 'react-router-dom'
 function Department() {
 
   const [randomPainting, setRandomPainting] = useState({})
-  const [error, setError] = useState()
+  const [error, setError] = useState({})
 
   const history = useNavigate()
   const id = useParams().id
 
   useEffect(()=>{
+      setRandomPainting({})
       fetchRandomPaintingFromDepartment(id)
   },[history])
 
@@ -23,7 +24,7 @@ function Department() {
       const randomPaintingResponse = await fetch(`http://localhost:3000/departments/${id}`)
       const randomPaintingBody = await randomPaintingResponse.json()
       if(Object.hasOwn(randomPaintingBody,'error')){
-        setError(randomPaintingBody.error)
+        setError(randomPaintingBody)
       }else{
         setRandomPainting(randomPaintingBody)
       }
@@ -33,15 +34,15 @@ function Department() {
   return(
     <Container>
     <Row className="d-flex justify-content-md-around pt-5">
-      {Object.keys(randomPainting).length > 0 ?
+      {Object.keys(error).length == 0 ?
       <>
       <h2 className="text-center">
-        A random painting from the <Link to={`/department/${randomPainting.department.departmentId}`}>{randomPainting.department.displayName}</Link> department
+        A random painting from the <b>{randomPainting?.department?.displayName}</b> department
       </h2>
      <PaintingCard painting={randomPainting?.painting}/>
      </>
       : <h2 className="text-center">
-        {error}
+        {error.error}
       </h2> }
     </Row>
   </Container>
