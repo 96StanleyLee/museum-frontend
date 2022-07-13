@@ -11,10 +11,10 @@ A React Frontend Application that displays different random artworks provided by
 This application is to be run with a Ruby on Rails server located [here]('url')
 
 To install 
-    npm i
+`npm i`
 
 To run 
-    npm start
+`npm start`
 
 Make sure that you're running the application on port 3001.
 
