@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-function MuseumDepartmentNav(props) {
+function MuseumDepartmentNav() {
 
   const [departments, setDepartments] = useState([])
 
